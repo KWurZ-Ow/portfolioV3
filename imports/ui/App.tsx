@@ -1,12 +1,16 @@
 import React from "react";
+import { Creations } from "./Creations";
 import { Hello } from "./Hello";
 import { Menu } from "./Menu";
 
 export const App = () => (
-  <div className="main">
-    <Menu />
+  <>
+    <div className="nav">
+      <Menu />
+    </div>
     <div className="pages">
       <Hello />
+      <Creations />
     </div>
-  </div>
+  </>
 );

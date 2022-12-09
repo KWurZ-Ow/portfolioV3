@@ -9,7 +9,7 @@ export const Hello = () => {
   };
 
   return (
-    <div>
+    <div className='page'>
       <h1>🌊 Portfolio</h1>
       <Button onClick={increment}>Click me!</Button>
       <p>You've pressed the button {counter} times.</p>
