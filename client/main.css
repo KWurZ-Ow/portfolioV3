@@ -1,4 +1,15 @@
 body {
-  padding: 10px;
   font-family: sans-serif;
+}
+
+.main{
+  display: flex;
+  height: 100vh;
+}
+
+.pages{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
