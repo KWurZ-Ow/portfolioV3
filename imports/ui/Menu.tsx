@@ -52,7 +52,7 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
         <Icon stroke={1.5} />
       </UnstyledButton>
     </Tooltip>
-  );
+  )
 }
 
 const mockdata = [
@@ -66,7 +66,7 @@ const mockdata = [
 ];
 
 export function Menu() {
-  const [active, setActive] = useState(2);
+  const [active, setActive] = useState(0);
 
   const links = mockdata.map((link, index) => (
     <NavbarLink
