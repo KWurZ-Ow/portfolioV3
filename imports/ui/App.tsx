@@ -1,17 +1,22 @@
-import React from "react";
-import { Creations } from "./Creations";
-import { Hello } from "./Hello";
+import React, { useState } from "react";
+import { MesCreations } from "./MesCreations";
 import { Menu } from "./Menu";
-import { Login } from "./Login"
+import { Presentation } from "./Presentation";
+import { Competences } from "./Competences";
+import { MesExperiences } from "./MesExperiences";
+import { useIntersection } from '@mantine/hooks';
 
-export const App = () => (
-  <>
+export const App = () => {
+  const [active, setActive] = useState(0);
+  return <>
     <div className="nav">
-      <Menu />
+      <Menu active={active} setActive={setActive} />
     </div>
     <div className="pages">
-      <Hello />
-      <Creations />
+      <Presentation />
+      <MesExperiences />
+      <Competences />
+      <MesCreations />
     </div>
   </>
-);
+};

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   Center,
@@ -6,24 +6,23 @@ import {
   UnstyledButton,
   createStyles,
   Stack,
-  Drawer,
   Avatar,
 } from "@mantine/core";
 import {
   TablerIcon,
   IconHome2,
   IconGauge,
-  IconDeviceDesktopAnalytics,
-  IconFingerprint,
   IconCalendarStats,
   IconUser,
-  IconSettings,
   IconLogout,
   IconSwitchHorizontal,
+  IconAward,
+  IconBackpack,
+  IconPalette,
 } from "@tabler/icons";
-import { MantineLogo } from "@mantine/ds";
 import { Login } from "./Login";
 import { useTracker } from "meteor/react-meteor-data";
+import { showNotification } from "@mantine/notifications";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -80,28 +79,36 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 }
 
 const mockdata = [
-  { icon: IconHome2, label: "Home" },
-  { icon: IconGauge, label: "Dashboard" },
-  { icon: IconDeviceDesktopAnalytics, label: "Analytics" },
-  { icon: IconCalendarStats, label: "Releases" },
-  { icon: IconUser, label: "Account" },
-  { icon: IconFingerprint, label: "Security" },
-  { icon: IconSettings, label: "Settings" },
+  { icon: IconHome2, label: "Accueil" },
+  { icon: IconBackpack, label: "Mes compétences" },
+  { icon: IconAward, label: "Mes expériences" },
+  { icon: IconPalette, label: "Mes créations" },
+  { icon: IconUser, label: "Gestion des utilisateurs", admin: true},
+  { icon: IconGauge, label: "Stats", admin: true },
 ];
 
-export function Menu() {
-  const [active, setActive] = useState(0);
+export function Menu({ active, setActive }) {
   const [opened, setOpened] = useState(false);
   const user = useTracker(() => Meteor.user());
 
-  const links = mockdata.map((link, index) => (
-    <NavbarLink
+  const links = mockdata.map((link, index) => {
+    if ((link.admin && user?.username === "admin") || !link.admin)
+    return <NavbarLink
       {...link}
       key={link.label}
       active={index === active}
       onClick={() => setActive(index)}
     />
-  ));
+  });
+
+  function handleLogout(){
+    Meteor.logout()
+    showNotification({
+      title: "Deconnexion réussie",
+      message: `À bientôt ${user?.username} ! 👋🏻`,
+      color: "orange"
+    })
+  }
 
   return (
     <>
@@ -126,7 +133,7 @@ export function Menu() {
               <NavbarLink
                 icon={IconLogout}
                 label="Logout"
-                onClick={() => Meteor.logout()}
+                onClick={() => handleLogout()}
               />
             )}
           </Stack>
