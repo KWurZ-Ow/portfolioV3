@@ -17,7 +17,7 @@ export const Hello = () => {
       <p>You've pressed the button {counter} times.</p>
       <h2>Créations</h2>
       {creas.map((crea) => {
-        return <div>
+        return <div key={crea.name}>
           <p>{crea.name}</p>
           <img src={crea.img} />
         </div>
