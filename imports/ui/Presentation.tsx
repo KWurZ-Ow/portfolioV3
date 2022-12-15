@@ -1,19 +1,46 @@
-import React from 'react';
-import { Creations } from '../db/Creations'
-import { useTracker } from 'meteor/react-meteor-data';
+import React, { useState } from "react";
+import { Grid, Image } from "@mantine/core";
 
-export const Presentation = () => {
-  const creas = useTracker(() => Creations.find({}).fetch());
-
+export function Presentation() {
+  let anniv: any = new Date("November 11, 2001");
   return (
-    <div className='page'>
-      <h1>🌊 Coucou</h1>
-      {creas.map((crea) => {
-        return <div key={crea.name}>
-          <p>{crea.name}</p>
-          <img src={crea.img} />
-        </div>
-      })}
+    <div className="page">
+      <Grid justify="space-around" align="center">
+        <Grid.Col span={4}>
+          <Image
+            src="/portrait.png"
+            alt="Portrait de Marius Proton"
+            height="95vh"
+            fit="contain"
+          />
+        </Grid.Col>
+        <Grid.Col span={8}>
+          <div>
+            <h1>Marius Proton</h1>
+            <h2>Bienvenue sur mon portfolio !</h2>
+            <p>
+              Hey ! Je m'appelle Marius, j'ai{" "}
+              {new Date(Date.now() - anniv).getFullYear() - 1970} ans et je suis
+              développeur applications web en alternance. <br />
+              J'étudie à l'école des{" "}
+              <a
+                href="https://www.gobelins.fr/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Gobelins
+              </a>{" "}
+              où je suis le bachelor <i>"Développeur web et applications"</i>.{" "}
+              <br /> Je travaille en alternance chez{" "}
+              <a href="https://ellistat.com/" target="_blank" rel="noreferrer">
+                Ellistat
+              </a>{" "}
+              en tant que développeur JavaScript fullstack
+            </p>
+            down
+          </div>
+        </Grid.Col>
+      </Grid>
     </div>
   );
-};
+}
